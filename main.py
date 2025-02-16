@@ -1,11 +1,12 @@
 from fastapi import FastAPI, File, UploadFile
 import uvicorn
+import os
 import numpy as np
 import cv2
 import io
 from sklearn.cluster import KMeans
 from typing import List
-import os
+
 
 app = FastAPI()
 
