@@ -5,6 +5,7 @@ import cv2
 import io
 from sklearn.cluster import KMeans
 from typing import List
+import os
 
 app = FastAPI()
 
@@ -33,5 +34,5 @@ async def analyze_image(file: UploadFile = File(...)):
     return {"colors": dominant_colors}
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
