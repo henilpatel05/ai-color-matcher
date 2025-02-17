@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "./components/Button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Upload } from "lucide-react";
+import { Button } from "./components/ui/Button";
+import { Card } from "./components/ui/Card";
+import { UploadIcon } from "./components/UploadIcon";
 
 const API_URL = "https://ai-color-matcher.onrender.com/analyze";
 
@@ -50,19 +50,17 @@ export default function ColorMatchApp() {
 
   return (
     <div className="flex flex-col items-center p-6 space-y-4">
-      <Card className="w-full max-w-md p-4 text-center">
-        <CardContent className="flex flex-col items-center">
-          <label className="cursor-pointer flex flex-col items-center">
-            <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
-            <Button variant="outline" className="flex items-center space-x-2">
-              <Upload /> <span>Upload Image</span>
-            </Button>
-          </label>
-          {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
-          <Button className="mt-4 w-full bg-blue-500 text-white" onClick={analyzeImage} disabled={!image || loading}>
-            {loading ? "Analyzing..." : "Analyze Color Match"}
+      <Card>
+        <label className="cursor-pointer flex flex-col items-center">
+          <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
+          <Button>
+            <UploadIcon /> <span>Upload Image</span>
           </Button>
-        </CardContent>
+        </label>
+        {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
+        <Button onClick={analyzeImage} disabled={!image || loading}>
+          {loading ? "Analyzing..." : "Analyze Color Match"}
+        </Button>
       </Card>
       {suggestedColors.length > 0 && (
         <div className="mt-4 grid grid-cols-3 gap-2">
