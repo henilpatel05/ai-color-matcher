@@ -54,33 +54,39 @@ export default function ColorMatchApp() {
   }
 
   return (
-  <div className="flex flex-col items-center p-6 space-y-4">
-    <Card>
-      {/* File input should be visible via button click */}
-      <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} hidden />
+    <div className="flex flex-col items-center p-6 space-y-4">
+      <Card>
+        {/* Hidden file input, triggered by the button */}
+        <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} hidden />
 
-      {/* Button triggers file input */}
-      <Button onClick={triggerFileUpload}>
-        <UploadIcon /> <span>Upload Image</span>
-      </Button>
+        {/* Button triggers file input */}
+        <Button onClick={triggerFileUpload}>
+          <UploadIcon /> <span>Upload Image</span>
+        </Button>
 
-      {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
+        {/* Display uploaded image */}
+        {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
 
-      {/* Analyze Button */}
-      <Button onClick={analyzeImage} disabled={!image || loading}>
-        {loading ? "Analyzing..." : "Analyze Color Match"}
-      </Button>
-    </Card>
+        {/* Analyze Button */}
+        <Button onClick={analyzeImage} disabled={!image || loading}>
+          {loading ? "Analyzing..." : "Analyze Color Match"}
+        </Button>
+      </Card>
 
-    {suggestedColors && suggestedColors.length > 0 && (
-  <div className="mt-4 grid grid-cols-3 gap-2">
-   {suggestedColors.length > 0 && (
-      <div className="mt-4 grid grid-cols-3 gap-2">
-        {suggestedColors.map((color, index) => (
-          <div key={index} className="h-16 w-16 rounded-lg" style={{ backgroundColor: color }} />/>
-        ))}
-      </div>
-    )}
-  </div>
-);
+      {/* Display Suggested Colors */}
+      {suggestedColors.length > 0 && (
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          {suggestedColors.map((color, index) => (
+            <div 
+              key={index} 
+              className="h-16 w-16 rounded-lg border shadow-lg flex justify-center items-center"
+              style={{ backgroundColor: color, color: "#fff" }}
+            >
+              <span className="font-bold text-sm">{color}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
