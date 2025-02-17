@@ -34,6 +34,7 @@ export default function ColorMatchApp() {
         body: formData,
       });
       const data = await response.json();
+      console.log("API Response:", data); // 🟢 Debugging Log
       setSuggestedColors(data.colors);
     } catch (error) {
       console.error("Error analyzing image:", error);
