@@ -1,5 +1,7 @@
 
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors 
+import CORSMiddleware
 import uvicorn
 import os
 import numpy as np
@@ -10,6 +12,15 @@ from typing import List
 
 
 app = FastAPI()
+
+# Allow frontend to communicate with backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change this to your frontend URL for security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def extract_dominant_colors(image_bytes: bytes, num_colors: int = 3) -> List[str]:
     # Convert image bytes to NumPy array
