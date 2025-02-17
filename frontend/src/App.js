@@ -74,17 +74,10 @@ export default function ColorMatchApp() {
 
     {suggestedColors && suggestedColors.length > 0 && (
   <div className="mt-4 grid grid-cols-3 gap-2">
-    {suggestedColors.map((color, index) => (
-      <div 
-        key={index} 
-        className="h-16 w-16 rounded-lg border shadow-lg"
-        style={{ backgroundColor: color }}
-      >
-        <span className="text-white font-bold text-sm block text-center p-2">{color}</span>
-      </div>
-    ))}
-  </div>
-)}/>
+   {suggestedColors.length > 0 && (
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        {suggestedColors.map((color, index) => (
+          <div key={index} className="h-16 w-16 rounded-lg" style={{ backgroundColor: color }} />/>
         ))}
       </div>
     )}
