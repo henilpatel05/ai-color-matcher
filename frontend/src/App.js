@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./components/ui/Button";
 import Card from "./components/ui/Card";
-import { UploadIcon } from "./components/UploadIcon";
+import UploadIcon from "./components/ui/UploadIcon";
 
 const API_URL = "https://ai-color-matcher.onrender.com/analyze";
 
