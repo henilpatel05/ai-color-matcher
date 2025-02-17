@@ -1,3 +1,3 @@
-export function UploadIcon() {
+export default function UploadIcon() {
   return <span>📤</span>;
 }
