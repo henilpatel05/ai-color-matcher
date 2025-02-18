@@ -34,7 +34,6 @@ export default function ColorMatchApp() {
         body: formData,
       });
       const data = await response.json();
-      console.log("API Response:", data); // 🟢 Debugging Log
       setSuggestedColors(data.colors);
     } catch (error) {
       console.error("Error analyzing image:", error);
@@ -55,25 +54,20 @@ export default function ColorMatchApp() {
 
   return (
     <div className="flex flex-col items-center p-6 space-y-4">
+      <div className="text-center mb-4">
+        <h1 className="text-2xl font-bold">AI Color Matcher</h1>
+        <p>Upload an image, and our AI will suggest the best matching colors for your outfit.</p>
+      </div>
       <Card>
-        {/* Hidden file input, triggered by the button */}
         <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} hidden />
-
-        {/* Button triggers file input */}
         <Button onClick={triggerFileUpload}>
           <UploadIcon /> <span>Upload Image</span>
         </Button>
-
-        {/* Display uploaded image */}
         {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
-
-        {/* Analyze Button */}
         <Button onClick={analyzeImage} disabled={!image || loading}>
           {loading ? "Analyzing..." : "Analyze Color Match"}
         </Button>
       </Card>
-
-      {/* Display Suggested Colors */}
       {suggestedColors.length > 0 && (
         <div className="mt-4 grid grid-cols-3 gap-2">
           {suggestedColors.map((color, index) => (
