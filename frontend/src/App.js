@@ -61,7 +61,7 @@ export default function ColorMatchApp() {
       </div>
       <Card>
         <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} hidden />
-        <Button onClick={triggerFileUpload}>
+        <Button className="upload-btn" onClick={triggerFileUpload}>
           <UploadIcon /> Upload Image
         </Button>
         {image && <img src={image} alt="Uploaded" className="uploaded-image" />}
