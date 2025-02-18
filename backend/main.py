@@ -13,7 +13,8 @@ app = FastAPI()
 # Allow frontend (Vercel) to communicate with backend (Render)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-color-matcher.vercel.app"],  # Change to specific frontend URL for security
+    # allow_origins=["https://ai-color-matcher.vercel.app"],  # Change to specific frontend URL for security
+    allow_origins=["*"], #please remove this when we are done with testing
     allow_credentials=True,
     allow_methods=["POST"],
     allow_headers=["*"],
