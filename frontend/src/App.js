@@ -14,6 +14,7 @@ export default function ColorMatchApp() {
   const [image, setImage] = useState(null);
   const [suggestedColors, setSuggestedColors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -52,6 +53,14 @@ export default function ColorMatchApp() {
     }
     return new Blob([ab], { type: mimeString });
   }
+
+  const copyToClipboard = (color, index) => {
+    if (!color) return;
+    navigator.clipboard.writeText(color).then(() => {
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 1500);
+    }).catch(err => console.error("Copy failed:", err));
+  };
 
   return (
     <div className="app-container">
