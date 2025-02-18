@@ -106,7 +106,7 @@ export default function ColorMatchApp() {
           ))}
         </div>
       )} */}
-      {suggestedColors.length > 0 && (
+      {/* {suggestedColors.length > 0 && (
         <div className="color-results-container">
           <h3 className="results-heading">Suggested Colors from Your Image</h3>
           <div className="color-results">
@@ -119,6 +119,24 @@ export default function ColorMatchApp() {
               >
                 <span>{color}</span>
                 {copiedIndex === index && <div className="copied-tooltip">Copied!</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )} */}
+      {suggestedColors.length > 0 && (
+        <div className="color-results">
+          <h3 className="results-heading">Extracted Colors</h3>
+          <div className="color-grid">
+            {suggestedColors.map((color, index) => (
+              <div 
+                key={index} 
+                className="color-box" 
+                style={{ backgroundColor: color }} 
+                onClick={() => copyToClipboard(color)}
+              >
+                <span>{color}</span>
+                {copied === color && <span className="copied-text">Copied</span>}
               </div>
             ))}
           </div>
