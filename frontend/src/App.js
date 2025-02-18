@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "./components/ui/Button";
 import Card from "./components/ui/Card";
 import UploadIcon from "./components/ui/UploadIcon";
+import "./index.css";
 
 const API_URL = "https://ai-color-matcher.onrender.com/analyze";
 
@@ -53,30 +54,26 @@ export default function ColorMatchApp() {
   }
 
   return (
-    <div className="flex flex-col items-center p-6 space-y-4">
-      <div className="text-center mb-4">
-        <h1 className="text-2xl font-bold">AI Color Matcher</h1>
+    <div className="app-container">
+      <div className="header">
+        <h1>AI Color Matcher</h1>
         <p>Upload an image, and our AI will suggest the best matching colors for your outfit.</p>
       </div>
       <Card>
         <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} hidden />
         <Button onClick={triggerFileUpload}>
-          <UploadIcon /> <span>Upload Image</span>
+          <UploadIcon /> Upload Image
         </Button>
-        {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
+        {image && <img src={image} alt="Uploaded" className="uploaded-image" />}
         <Button onClick={analyzeImage} disabled={!image || loading}>
           {loading ? "Analyzing..." : "Analyze Color Match"}
         </Button>
       </Card>
       {suggestedColors.length > 0 && (
-        <div className="mt-4 grid grid-cols-3 gap-2">
+        <div className="color-results">
           {suggestedColors.map((color, index) => (
-            <div 
-              key={index} 
-              className="h-16 w-16 rounded-lg border shadow-lg flex justify-center items-center"
-              style={{ backgroundColor: color, color: "#fff" }}
-            >
-              <span className="font-bold text-sm">{color}</span>
+            <div key={index} className="color-box" style={{ backgroundColor: color }}>
+              <span>{color}</span>
             </div>
           ))}
         </div>

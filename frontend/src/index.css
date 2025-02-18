@@ -1,54 +1,71 @@
-/* General page styles */
 body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
     margin: 0;
     padding: 20px;
     color: #333;
-  }
-  
-  h1 {
-    color: #333;
     text-align: center;
-  }
-  
-  p {
+}
+
+h1 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 350px;
     text-align: center;
-    color: #666;
-  }
-  
-  /* Button styles */
-  .button, button {
-    background-color: #007BFF; /* Blue background */
+}
+
+.uploaded-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #007BFF;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .button:hover, button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
-  /* Card styles */
-  .card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 500px; /* Adjust width as per your layout needs */
-    margin: 20px auto;
-  }
-  
-  /* Image styles */
-  img {
-    max-width: 100%; /* Ensures images are never wider than their container */
-    height: auto;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.color-results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.color-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
-  }
-  
+    color: #fff;
+    font-weight: bold;
+}
