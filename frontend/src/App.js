@@ -5,6 +5,10 @@ import UploadIcon from "./components/ui/UploadIcon";
 
 const API_URL = "https://ai-color-matcher.onrender.com/analyze";
 
+const triggerFileUpload = () => {
+  document.getElementById("fileInput").click();
+};
+
 export default function ColorMatchApp() {
   const [image, setImage] = useState(null);
   const [suggestedColors, setSuggestedColors] = useState([]);
@@ -33,16 +37,15 @@ export default function ColorMatchApp() {
       setSuggestedColors(data.colors);
     } catch (error) {
       console.error("Error analyzing image:", error);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   function dataURItoBlob(dataURI) {
-    const byteString = atob(dataURI.split(",")[1]);
-    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
+    let byteString = atob(dataURI.split(",")[1]);
+    let mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+    let ab = new ArrayBuffer(byteString.length);
+    let ia = new Uint8Array(ab);
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
@@ -52,7 +55,7 @@ export default function ColorMatchApp() {
   return (
     <div className="flex flex-col items-center p-6 space-y-4">
       <div className="text-center mb-4">
-        <h1>AI Color Matcher</h1>
+        <h1 className="text-2xl font-bold">AI Color Matcher</h1>
         <p>Upload an image, and our AI will suggest the best matching colors for your outfit.</p>
       </div>
       <Card>
@@ -60,7 +63,7 @@ export default function ColorMatchApp() {
         <Button onClick={triggerFileUpload}>
           <UploadIcon /> <span>Upload Image</span>
         </Button>
-        {image && <img src={image} alt="Uploaded" className="mt-4" />}
+        {image && <img src={image} alt="Uploaded" className="mt-4 w-full rounded-lg" />}
         <Button onClick={analyzeImage} disabled={!image || loading}>
           {loading ? "Analyzing..." : "Analyze Color Match"}
         </Button>
@@ -68,9 +71,12 @@ export default function ColorMatchApp() {
       {suggestedColors.length > 0 && (
         <div className="mt-4 grid grid-cols-3 gap-2">
           {suggestedColors.map((color, index) => (
-            <div key={index} className="h-16 w-16 rounded-lg border shadow-lg flex justify-center items-center"
-              style={{ backgroundColor: color, color: "#fff" }}>
-              <span>{color}</span>
+            <div 
+              key={index} 
+              className="h-16 w-16 rounded-lg border shadow-lg flex justify-center items-center"
+              style={{ backgroundColor: color, color: "#fff" }}
+            >
+              <span className="font-bold text-sm">{color}</span>
             </div>
           ))}
         </div>
