@@ -65,9 +65,23 @@ export default function ColorMatchApp() {
           <UploadIcon /> Upload Image
         </Button>
         {image && <img src={image} alt="Uploaded" className="uploaded-image" />}
-        <Button onClick={analyzeImage} disabled={!image || loading}>
+        {/* <Button onClick={analyzeImage} disabled={!image || loading}>
           {loading ? "Analyzing..." : "Analyze Color Match"}
+        </Button> */}
+        <Button
+          className={`analyze-btn ${image ? "active" : ""}`}
+          onClick={analyzeImage}
+          disabled={!image || loading}
+        >
+          {loading ? (
+            <span className="analyzing">
+              <div className="loader"></div> Analyzing...
+            </span>
+          ) : (
+            "Analyze Color Match"
+          )}
         </Button>
+
       </Card>
       {suggestedColors.length > 0 && (
         <div className="color-results">
