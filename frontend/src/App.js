@@ -14,7 +14,7 @@ export default function ColorMatchApp() {
   const [image, setImage] = useState(null);
   const [suggestedColors, setSuggestedColors] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [copiedIndex, setCopiedIndex] = useState(null);
+  const [copied, setCopiedIndex] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
