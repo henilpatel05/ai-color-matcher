@@ -83,15 +83,6 @@ export default function ColorMatchApp() {
         </Button>
 
       </Card>
-      {/* {suggestedColors.length > 0 && (
-        <div className="color-results">
-          {suggestedColors.map((color, index) => (
-            <div key={index} className="color-box" style={{ backgroundColor: color }}>
-              <span>{color}</span>
-            </div>
-          ))}
-        </div>
-      )} */}
       {suggestedColors.length > 0 && (
         <div className="color-results">
           {suggestedColors.map((color, index) => (
