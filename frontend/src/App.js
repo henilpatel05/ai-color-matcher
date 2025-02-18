@@ -10,6 +10,15 @@ const triggerFileUpload = () => {
   document.getElementById("fileInput").click();
 };
 
+//this is for color result to copy color code
+const [copiedIndex, setCopiedIndex] = useState(null);
+
+const copyToClipboard = (color, index) => {
+  navigator.clipboard.writeText(color);
+  setCopiedIndex(index);
+  setTimeout(() => setCopiedIndex(null), 1500); // Hide tooltip after 1.5 seconds
+};
+
 export default function ColorMatchApp() {
   const [image, setImage] = useState(null);
   const [suggestedColors, setSuggestedColors] = useState([]);
@@ -86,15 +95,6 @@ export default function ColorMatchApp() {
       {/* {suggestedColors.length > 0 && (
         <div className="color-results">
           {suggestedColors.map((color, index) => (
-            <div key={index} className="color-box" style={{ backgroundColor: color }}>
-              <span>{color}</span>
-            </div>
-          ))}
-        </div>
-      )} */}
-      {suggestedColors.length > 0 && (
-        <div className="color-results">
-          {suggestedColors.map((color, index) => (
             <div
               key={index}
               className="color-box"
@@ -104,6 +104,24 @@ export default function ColorMatchApp() {
               <span>{color}</span>
             </div>
           ))}
+        </div>
+      )} */}
+      {suggestedColors.length > 0 && (
+        <div className="color-results-container">
+          <h3 className="results-heading">Suggested Colors from Your Image</h3>
+          <div className="color-results">
+            {suggestedColors.map((color, index) => (
+              <div
+                key={index}
+                className="color-box"
+                style={{ backgroundColor: color }}
+                onClick={() => copyToClipboard(color, index)}
+              >
+                <span>{color}</span>
+                {copiedIndex === index && <div className="copied-tooltip">Copied!</div>}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
