@@ -92,7 +92,7 @@ export default function ColorMatchApp() {
         </Button>
 
       </Card>
-      {suggestedColors.length > 0 && (
+      {/* {suggestedColors.length > 0 && (
         <div className="color-results">
           {suggestedColors.map((color, index) => (
             <div
@@ -104,6 +104,24 @@ export default function ColorMatchApp() {
               <span>{color}</span>
             </div>
           ))}
+        </div>
+      )} */}
+      {suggestedColors.length > 0 && (
+        <div className="color-results-container">
+          <h3 className="results-heading">Suggested Colors from Your Image</h3>
+          <div className="color-results">
+            {suggestedColors.map((color, index) => (
+              <div
+                key={index}
+                className="color-box"
+                style={{ backgroundColor: color }}
+                onClick={() => copyToClipboard(color, index)}
+              >
+                <span>{color}</span>
+                {copiedIndex === index && <div className="copied-tooltip">Copied!</div>}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
