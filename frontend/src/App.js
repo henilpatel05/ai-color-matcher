@@ -14,6 +14,7 @@ export default function ColorMatchApp() {
   const [image, setImage] = useState(null);
   const [suggestedColors, setSuggestedColors] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [copied, setCopiedIndex] = useState(null);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -53,6 +54,14 @@ export default function ColorMatchApp() {
     return new Blob([ab], { type: mimeString });
   }
 
+  const copyToClipboard = (color, index) => {
+    if (!color) return;
+    navigator.clipboard.writeText(color).then(() => {
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 1500);
+    }).catch(err => console.error("Copy failed:", err));
+  };
+
   return (
     <div className="app-container">
       <div className="header">
@@ -86,15 +95,6 @@ export default function ColorMatchApp() {
       {/* {suggestedColors.length > 0 && (
         <div className="color-results">
           {suggestedColors.map((color, index) => (
-            <div key={index} className="color-box" style={{ backgroundColor: color }}>
-              <span>{color}</span>
-            </div>
-          ))}
-        </div>
-      )} */}
-      {suggestedColors.length > 0 && (
-        <div className="color-results">
-          {suggestedColors.map((color, index) => (
             <div
               key={index}
               className="color-box"
@@ -104,6 +104,42 @@ export default function ColorMatchApp() {
               <span>{color}</span>
             </div>
           ))}
+        </div>
+      )} */}
+      {/* {suggestedColors.length > 0 && (
+        <div className="color-results-container">
+          <h3 className="results-heading">Suggested Colors from Your Image</h3>
+          <div className="color-results">
+            {suggestedColors.map((color, index) => (
+              <div
+                key={index}
+                className="color-box"
+                style={{ backgroundColor: color }}
+                onClick={() => copyToClipboard(color, index)}
+              >
+                <span>{color}</span>
+                {copiedIndex === index && <div className="copied-tooltip">Copied!</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )} */}
+      {suggestedColors.length > 0 && (
+        <div className="color-results">
+          <h3 className="results-heading">Extracted Colors</h3>
+          <div className="color-grid">
+            {suggestedColors.map((color, index) => (
+              <div 
+                key={index} 
+                className="color-box" 
+                style={{ backgroundColor: color }} 
+                onClick={() => copyToClipboard(color)}
+              >
+                <span>{color}</span>
+                {copied === color && <span className="copied-text">Copied</span>}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
